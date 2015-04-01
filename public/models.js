@@ -19,6 +19,11 @@
     },
     initialize: function(data, options) {
       this.team = options.team;
+      this.on("add", function(model){
+        if(model.isNew()) {
+          model.set("_team_id", this.team.id);
+        }
+      });
     }
   });
 

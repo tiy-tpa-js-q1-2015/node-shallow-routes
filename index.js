@@ -27,9 +27,9 @@ var colRouter = require("./collection_router");
 var memRouter = require("./member_router");
 
 app.use("/teams",             new colRouter(teamsDB).router);
-app.use("/teams/:id/users",   new colRouter(usersDB).router);
-app.use("/users/:id/goals",   new colRouter(goalsDB).router);
-app.use("/goals/:id/entries", new colRouter(entryDB).router);
+app.use("/teams/:id/users",   new colRouter(usersDB, {scope: "_team_id"}).router);
+app.use("/users/:id/goals",   new colRouter(goalsDB, {scope: "_user_id"}).router);
+app.use("/goals/:id/entries", new colRouter(entryDB, {scope: "_goal_id"}).router);
 
 app.use("/teams",   new memRouter(teamsDB).router);
 app.use("/users",   new memRouter(usersDB).router);
